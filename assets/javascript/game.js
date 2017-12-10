@@ -24,8 +24,6 @@ function reset() {
 function startGame() {
   compLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
   guesses = 9;
-  wins = 0;
-  losses = 0;
   document.getElementById("letters-guessed").innerHTML = ("Letters Guessed: ");
   document.getElementById("guesses-left").innerHTML = ("Guesses Left: ");
 
