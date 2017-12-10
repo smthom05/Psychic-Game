@@ -5,7 +5,7 @@ var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
 var wins = 0;
 var losses = 0;
 var guesses = 9;
-var isLetterGuessed;
+
 
 
 // Created variable that randomly selects the computer's letter.
@@ -14,35 +14,51 @@ var compLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
 // Confirms a random letter has been selected.
 console.log(compLetter);
 
-// Created a function to reset after a win or a loss.
-// function resetGame() {
-//   isLetterGuessed = true;
-//   document.getElementsById("letters-guessed").reset();
-//   document.getElementsById("guesses-left").reset();
-// }
+//Created a function to reset after a win or a loss.
+function reset() {
+  document.getElementById("letters-guessed").innerHTML = ("Letters Guessed: ");
+  document.getElementById("guesses-left").innerHTML = ("Guesses Left: ");
+  wins = 0;
+  losses = 0;
+  startGame();
+};
+
+function startGame() {
+  compLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+  guesses = 9;
+  document.getElementById("letters-guessed").innerHTML = ("Letters Guessed: ");
+  document.getElementById("guesses-left").innerHTML = ("Guesses Left: ");
+}
+
 
 // When the user hits a key, this function will begin...
-document.onkeypress = function(event) {
-  userGuess = event.key
+document.onkeyup = function(event) {
+  userGuess = event.key;
+  var userGuess = userGuess.toLowerCase()
 
-  if (userGuess === compLetter) {
+   if (event.keyCode <= 64 || event.keyCode >= 91) {
+     alert("Type letters only");
+  };
+
+  if (userGuess === compLetter && event.keyCode >=65 && event.keyCode <=90 ) {
     wins++;
     alert("You got it right! My letter was " + compLetter);
-    // resetGame();
-  } else {
+    startGame();
+  } else if (userGuess !== compLetter && event.keyCode >=65 && event.keyCode <=90) {
     guesses--;
   };
 
   if (guesses === 0) {
     losses++;
     alert("You lost! My letter was " + compLetter);
-    // resetGame();
+    startGame();
   }
-
-
 
   document.getElementById("wins").innerHTML = ("Wins: " + wins);
   document.getElementById("losses").innerHTML = ("Losses: " + losses);
-  document.getElementById("guesses-left").innerHTML = ("Guesses left: " + guesses);
-  document.getElementById("letters-guessed").append(userGuess + ", ");
+  document.getElementById("guesses-left").innerHTML = ("Guesses Left: " + guesses);
+
+  if (event.keyCode >=65 && event.keyCode <=90) {
+    document.getElementById("letters-guessed").append(userGuess + ", ");
+  };
 };

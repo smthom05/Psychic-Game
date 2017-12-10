@@ -33,3 +33,7 @@ h1  {
 #letters-guessed {
   color: orange;
 }
+
+#reset {
+  background: white;
+}
