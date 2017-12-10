@@ -6,8 +6,6 @@ var wins = 0;
 var losses = 0;
 var guesses = 9;
 
-
-
 // Created variable that randomly selects the computer's letter.
 var compLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
 
@@ -26,20 +24,24 @@ function reset() {
 function startGame() {
   compLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
   guesses = 9;
+  wins = 0;
+  losses = 0;
   document.getElementById("letters-guessed").innerHTML = ("Letters Guessed: ");
   document.getElementById("guesses-left").innerHTML = ("Guesses Left: ");
-}
 
+}
 
 // When the user hits a key, this function will begin...
 document.onkeyup = function(event) {
   userGuess = event.key;
   var userGuess = userGuess.toLowerCase()
 
-   if (event.keyCode <= 64 || event.keyCode >= 91) {
-     alert("Type letters only");
+// An if statement to make sure the key hit is a letter.
+  if (event.keyCode <= 64 || event.keyCode >= 91) {
+    alert("Type letters only");
   };
 
+// An if statement that will establish the winning and losing parameters of the game.
   if (userGuess === compLetter && event.keyCode >=65 && event.keyCode <=90 ) {
     wins++;
     alert("You got it right! My letter was " + compLetter);
